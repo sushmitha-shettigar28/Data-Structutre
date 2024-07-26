@@ -1,0 +1,275 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+      int value;
+     char name[20];
+     int roll;
+     struct node *next;
+};
+struct node *head1=NULL;
+struct node *head2=NULL;
+struct node *head3=NULL;
+struct node *p;
+int item;
+void push1()
+{
+     int element;
+     struct node *newnode;
+     newnode=malloc(sizeof(struct node));
+     printf("Enter the element : ");
+     scanf("%d",&element);
+     newnode->value=element;
+     newnode->next=NULL;
+     if(head1==NULL)
+         head1=newnode;
+    else
+    {
+             newnode->next=head1;
+                head1=newnode;
+       }
+}
+void pop1()
+{
+          p=head1;
+          if(p==NULL)
+{
+      printf("Stack Underflow\n");
+}
+         else
+{
+      item=p->value;
+      head1=head1->next;
+    free(p);
+        printf("Element popped is %d\n",item);
+  }
+}
+void display1()
+{
+p=head1;
+while(p!=NULL)
+{
+      printf("%d\t",p->value);
+      p=p->next;
+  }
+}
+void push2()
+{
+  int element;
+  struct node *newnode;
+  newnode=malloc(sizeof(struct node));
+  printf("Enter the element : ");
+  scanf("%d",&element);
+  newnode->value=element;
+  newnode->next=NULL;
+if(head2==NULL)
+ head2=newnode;
+else
+{
+  newnode->next=head2;
+  head2=newnode;
+}
+}
+void pop2()
+{
+p=head2;
+if(p==NULL)
+{
+  printf("Stack Underflow\n");
+}
+else
+{
+ item=p->value;
+ head2=head2->next;
+ free(p);
+ printf("Element popped is %d\n",item);
+}
+}
+void display2()
+{
+p=head2;
+while(p!=NULL)
+{
+  printf("%d\t",p->value);
+  p=p->next;
+}
+}
+void search1()
+{
+int flag=0,i=0,element;
+p=head1;
+if(p==NULL)
+ printf("Stack is empty\n");
+else
+{
+  printf("Enter the element to search\n");
+ scanf("%d",&element);
+while(p!=NULL)
+{
+       if(p->value==element)
+        {
+  flag=1;
+  break;
+        }
+        else
+ p=p->next;
+       i++; 
+                            }
+                          printf("Element found at position %d\n",i+1);
+               }
+     }
+void search2()
+{
+          int flag=0,i=0,element;
+          p=head2;
+          if(p==NULL)
+          printf("Stack is empty\n");
+           else
+           {
+                printf("Enter the element to search\n");
+                scanf("%d",&element);
+                while(p!=NULL)
+                 {
+if(p->value==element)
+{
+flag=1;
+break;
+}
+else
+p=p->next;
+i++;
+}
+printf("Element found at position %d\n",i+1);
+            }
+}
+void concatenate()
+{
+         p=head1;
+        if(head1==NULL)
+        {
+                        head1=head2;
+          }
+         else
+         {
+                 while(p->next!=NULL)
+                      {
+p=p->next;
+       }
+   p->next=head2;
+       }
+       printf("Stack 2 has been Concatenated to Stack 1\n");
+}
+void insert3()
+{
+  p=head3;
+struct node *newnode;
+char sname[20];
+int rno,i;
+newnode=malloc(sizeof(struct node));
+printf("Name of the student : ");
+scanf("%s",sname);
+printf("Enter the roll no of the student : ");
+scanf("%d",&rno);
+newnode->roll=rno;
+for(i=0;sname[i]!='\0';i++)
+{
+newnode->name[i]=sname[i];
+}
+newnode->next=NULL;
+if (head3==NULL)
+ head3=newnode;
+else
+{
+while(p->next!=NULL)
+{
+p=p->next;
+}
+p->next=newnode;
+}
+printf("After inserting the queue is \n");
+p=head3;
+while(p!=NULL)
+{
+printf("Name = %s\n",p->name);
+printf("Roll no = %d\n",p->roll);
+p=p->next;
+}
+    }
+void delete3()
+{
+p=head3;
+head3=head3->next;
+free(p);
+printf("After Deleting , The queue is \n");
+p=head3;
+while(p!=NULL)
+{
+printf("Name = %s\n",p->name);
+printf("Roll no = %d\n",p->roll);
+p=p->next;
+}
+}
+void main()
+{
+int c,ch;
+while(1)
+{
+printf("\nMenu\n1.Push\n2.Pop\n3.Display\n4.Search\n5.Concatenate\n6.Insert Student Details to queue\n7.Delete Student Details from queue\ n8.Exit \nEnter your choice : ");
+scanf("%d",&c);
+switch(c)
+{
+ case 1: printf("\n1.First Stack\n2.Second Stack\nSelect the Stack : ");
+scanf("%d",&ch);
+if(ch==1)
+{
+push1();
+}
+else
+{
+push2();
+}
+break;
+ case 2: printf("\n1.First Stack\n2.Second Stack\nSelect the Stack : ");
+scanf("%d",&ch);
+if(ch==1)
+{
+pop1();
+}
+else
+{
+pop2();
+}
+break;
+ case 3: printf("\n1.First Stack\n2.Second Stack\nSelect the Stack : ");
+scanf("%d",&ch);
+if(ch==1)
+{
+display1();
+}
+else
+{
+display2();
+}
+break;
+ case 4: printf("\n1.First Stack\n2.Second Stack\nSelect the Stack : ");
+scanf("%d",&ch);
+if(ch==1)
+{
+search1();
+}
+else
+{
+search2();
+}
+break;
+ case 5: concatenate();
+break;
+ case 6: insert3();
+break;
+ case 7: delete3();
+break;
+ case 8: exit(0);
+default: printf("Invalid Input\n");
+ }
+ }
+}
