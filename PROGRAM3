@@ -1,0 +1,60 @@
+struct stack
+{
+    int element;
+    struct stack *next;
+}*top;
+
+void push(int value)
+{
+struct stack *ptr;
+ptr=(struct stack*)malloc(sizeof(struct stack));
+ptr->element=value;
+ptr->next=top;
+top=ptr;
+}
+
+int pop()
+{
+int temp;
+if(top==NULL)
+{
+printf("\n\ STACK is Empty.");
+getch();
+exit(1);
+}
+else
+{
+temp=top->element;
+top=top->next;
+return (temp);
+}
+}
+
+void display()
+{ 
+struct stack *ptr1=NULL;
+ptr1=top;
+printf("\nThe various stack elements are:\n");
+
+while(ptr1!=NULL)
+{
+printf("%d\t",ptr1->element); /*Printing stack elements*/
+ptr1=ptr1->next;
+}
+}
+
+void main()
+
+{
+
+int num1, num2;
+printf("\n\tEnter the element to be pushed into the stack: ");
+scanf("%d",&num1);
+push(num1);
+printf("\n\tEnter the element to be pushed into the stack: ");
+scanf("%d",&num1);
+push(num1);
+display();
+pop();
+display();
+}
