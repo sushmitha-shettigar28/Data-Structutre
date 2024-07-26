@@ -1,0 +1,170 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+int ID;
+char name[20];
+char branch[20];
+char aos[20];
+struct node *next;
+struct node *prev;
+};
+struct node *p;
+struct node *head1=NULL;
+struct node *head2=NULL;
+void insert()
+{
+p=head1;
+struct node *newnode;
+char sname[20],pbranch[20],paos[20];
+int Id,i;
+newnode=malloc(sizeof(struct node));
+printf("Enter the ID of the Professor : ");
+scanf("%d",&Id);
+printf("Enter the Name of the Professor : ");
+scanf("%s",sname);
+printf("Enter the Branch of the Professor  : ");
+scanf("%s",pbranch);
+printf("Enter the Area of Specialization of the Professor  : ");
+scanf("%s",paos);
+newnode->ID=Id;
+for(i=0;sname[i]!='\0';i++)
+{
+newnode->name[i]=sname[i];
+}
+newnode->name[i] = '\0';
+for(i=0;pbranch[i]!='\0';i++)
+{
+newnode->branch[i]=pbranch[i];
+}
+for(i=0;paos[i]!='\0';i++)
+{
+newnode->aos[i]=paos[i];
+}
+newnode->next=NULL;
+newnode->prev=NULL;
+if (head1==NULL)
+ head1=newnode;
+else
+{
+while(p->next!=NULL)
+{
+p=p->next;
+}
+p->next=newnode;
+}
+}
+void push()
+{
+p=head2;
+struct node *newnode;
+char sname[20],pbranch[20],paos[20];
+int Id,i;
+newnode=malloc(sizeof(struct node));
+printf("Enter the ID of the Professor  : ");
+scanf("%d",&Id);
+printf("Enter the Name of the Professor : ");
+scanf("%s",sname);
+printf("Enter the Branch of the Professor  : ");
+scanf("%s",pbranch);
+printf("Enter the Area of Specialization of the Professor  : ");
+scanf("%s",paos);
+newnode->ID=Id;
+for(i=0;sname[i]!='\0';i++)
+{
+newnode->name[i] = sname[i];
+}
+newnode->name[i] = '\0';
+for(i=0;pbranch[i]!='\0';i++)
+{
+newnode->branch[i]=pbranch[i];
+}
+for(i=0;paos[i]!='\0';i++)
+{
+newnode->aos[i]=paos[i];
+}
+newnode->next=NULL;
+newnode->prev=NULL;
+if (head2==NULL)
+ head2=newnode;
+else
+{
+newnode->next=head2;
+head2=newnode;
+}
+}
+void pop2()
+{
+p=head2;
+if(p==NULL)
+{
+printf("Stack Underflow\n");
+}
+else
+{
+head2=head2->next;
+free(p);
+}
+}
+void delet()
+{
+p=head1;
+head1=head1->next;
+free(p);
+}
+void display1()
+{
+p=head1;
+int i=0;
+while(p!=NULL)
+{
+printf("ID of the Professor  %d : %d\n",i+1,p->ID);
+printf("Name of the Proffesor %d : %s\n",i+1,p->name);
+printf("Branch of the Professor  %d : %s\n",i+1,p->branch);
+printf("Area of Specialization of the Professor  %d : %s\n",i+1,p->aos);
+p=p->next;
+i++;
+}
+}
+void display2()
+{
+p=head2;
+int i=0;
+while(p!=NULL)
+{
+printf("ID of the Professor  %d : %d\n",i+1,p->ID);
+printf("Name of the Professor %d : %s\n",i+1,p->name);
+printf("Branch of the Professor  %d : %s\n",i+1,p->branch);
+printf("Area of Specialization of the Professor  %d : %s\n",i+1,p->aos);
+p=p->next;
+i++;
+}
+}
+void main()
+{
+int choice;
+while(1)
+{
+printf("\n\n1.Insert Professor  Data to Queue\n2.Delete Professor  Data from the Queue\n3.Display the Queue\n4.Push Professor  Details to the stack\n5.Pop the Professor  Details from the stack\n6.Display the Stack\n7.Exit\nEnter the choice : ");
+scanf("%d",&choice);
+printf("\n");
+ switch(choice)
+ {
+ case 1:insert();
+break;
+ case 2:delet();
+break;
+ case 3:display1();
+break;
+ case 4:push();
+break;
+ case 5:pop2();
+break;
+ case 6:display2();
+break;
+ case 7:printf("You have selected to exit\n");
+        exit(0);
+ default: printf("Invlaid Input!!!\n");
+}
+}
+}
