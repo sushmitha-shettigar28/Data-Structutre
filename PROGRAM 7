@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct tree
+{
+int data;
+struct tree *left,*right;
+};
+typedef struct tree Node;
+Node *newnode(int data)
+{
+Node *node=(Node*) malloc(sizeof(Node));
+node->data=data;
+node->left=node->right=NULL;
+return (node);
+}
+Node *levelorder(int a[],int i,int n)
+{
+Node*root=NULL;
+if(i<n)
+{
+root=newnode(a[i]);
+root->left=levelorder(a,(2*i+
+root->right=levelorder(a,(2*i+
+}
+return root;
+}
+void inorder(Node *root)
+{
+
+if(root!=NULL)
+{
+inorder(root->left);
+printf("%d\t",root->data);
+inorder(root->right);
+}
+}
+void preorder(Node *root)
+{
+if(root!=NULL)
+{
+printf("%d\t",root->data);
+preorder(root->left);
+preorder(root->right);
+}
+}
+void postorder(Node *root)
+{
+if(root!=NULL)
+{
+postorder(root->left);
+postorder(root->right);
+printf("%d\t",root->data);
+}
+}
+void main()
+{
+int a[]={1,2,3,4,5,6};
+printf("Level Order Travesal :\n");
+for(int i=0;i<6;i++)
+{
+printf("%d\t",a[i]);
+}
+int n=sizeof(a)/sizeof(a[0]);
+Node *root=levelorder(a,0,n);
+printf("\nInorder Traversal :\n");
+inorder(root);
+printf("\nPreorder Traversal :\n");
+preorder(root);
+printf("\nPostorder Traversal :\n");
+postorder(root);
+printf("\n");
+}
